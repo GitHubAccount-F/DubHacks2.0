@@ -27,7 +27,7 @@ Built during **DubHacks 2025**, the project focuses on turning indecision into d
 |-----------|-------|
 | Frontend | React + Vite |
 | Data Parsing | PapaParse |
-| Styling | Custom CSS (Lantern palette theme) |
+| Styling | Custom CSS |
 | Data Source | Pre-cleaned CSV (`movies_final_set.csv`) |
 | Caching | LocalStorage |
 | Deployment | Vercel / Netlify |

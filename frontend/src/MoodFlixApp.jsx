@@ -134,7 +134,7 @@ export default function MoodFlixApp({ csvUrl = "/movies_final_set.csv" }) {
       {/* Fixed top bar */}
       <header className="mf-topbar">
         <div className="mf-topbar-inner">
-          <div className="mf-brand">🎬 MovieFinder</div>
+          <div className="mf-brand">🎬 MoodFlix</div>
           <input
             className="mf-search"
             placeholder="Search title, description, genre, or keyword…"
