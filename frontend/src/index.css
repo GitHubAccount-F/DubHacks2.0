@@ -1,0 +1,174 @@
+/* =========================
+   Global Reset & Variables
+   ========================= */
+   * { box-sizing: border-box; }
+   html, body { height: 100%; margin: 0; background: #0f172a; color: #e5e7eb; }
+   #root { width: 100%; max-width: none; margin: 0; padding: 0; }
+   
+   :root {
+     --topbar-h: 64px;  /* fixed header height */
+     --card-h: 460px;   /* flip card height (adjust 420–520 to taste) */
+     --content-w: 1200px; /* max content width */
+     --gap: 16px;       /* grid/card spacing */
+   }
+   
+   /* =========================
+      App Shell
+      ========================= */
+   .mf-wrap {
+     min-height: 100vh;
+     background: #0f172a;
+     color: #e5e7eb;
+     padding-top: var(--topbar-h); /* offsets fixed header */
+     overflow-x: hidden;
+   }
+   
+   /* Fixed top bar */
+   .mf-topbar {
+     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+     height: var(--topbar-h);
+     background: #0b1224;
+     border-bottom: 1px solid #1f2937;
+   }
+   .mf-topbar-inner {
+     height: 100%;
+     max-width: var(--content-w);
+     margin: 0 auto;
+     padding: 0 20px;
+     display: flex; align-items: center; gap: var(--gap);
+   }
+   .mf-brand { font-weight: 700; color: #67e8f9; }
+   .mf-search {
+     margin-left: auto;
+     width: 520px; max-width: 55vw;
+     padding: 10px 14px;
+     border-radius: 999px;
+     border: 1px solid #334155;
+     background: #111827; color: #e5e7eb; outline: none;
+   }
+   .mf-search:focus { box-shadow: 0 0 0 3px rgba(56,189,248,.25); border-color: #38bdf8; }
+   
+   /* =========================
+      Main Content
+      ========================= */
+   .mf-container {
+     max-width: var(--content-w);
+     width: 100%;
+     margin: 18px auto;
+     padding: 0 20px;
+   }
+   .mf-results-count { font-size: 12px; color: #94a3b8; margin-bottom: 10px; }
+   
+   /* Grid: 5 across on desktop, responsive below */
+   .mf-grid {
+     list-style: none; margin: 0; padding: 0;
+     display: grid;
+     grid-template-columns: repeat(5, minmax(0, 1fr));
+     gap: var(--gap);
+   }
+   @media (max-width: 1200px) { .mf-grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+   @media (max-width: 992px)  { .mf-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+   @media (max-width: 768px)  { .mf-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+   @media (max-width: 480px)  { .mf-grid { grid-template-columns: 1fr; } }
+   
+   /* =========================
+      Card (Base Visuals)
+      ========================= */
+   .mf-card {
+     background: #111827;
+     border: 1px solid #1f2937;
+     border-radius: 14px;
+     overflow: hidden;
+     display: flex; flex-direction: column;
+     box-shadow: 0 4px 12px rgba(0,0,0,.25);
+   }
+   .mf-poster-wrap { background: #0b1224; }
+   .mf-poster { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; display: block; }
+   
+   .mf-card-body { padding: 10px 12px; }
+   .mf-title { font-weight: 700; font-size: 14px; color: #f8fafc; margin-bottom: 4px; }
+   
+   /* Rating row */
+   .mf-meta {
+     margin-top: 4px;
+     font-size: 12px;
+     color: #94a3b8;
+     display: flex; align-items: center; gap: 6px;
+   }
+   .mf-meta strong { color: #e5e7eb; font-weight: 700; }
+   .mf-star { color: #fbbf24; }
+   .mf-outof { color: #64748b; }
+   
+   /* Genre chips */
+   .mf-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+   .mf-tag {
+     font-size: 12px; line-height: 1; padding: 6px 10px;
+     border-radius: 999px;
+     background: #0b1224; color: #cbd5e1; border: 1px solid #233047;
+     transition: transform .15s ease;
+   }
+   .mf-tag:hover { transform: scale(1.05); }
+   .mf-tag--more { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; }
+   
+   /* =========================
+      3D Flip Behavior
+      ========================= */
+   .mf-card3d {
+     perspective: 1000px;
+     position: relative;
+     height: var(--card-h);     /* ensures faces have a box to live in */
+   }
+   .mf-card-inner {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     transform-style: preserve-3d;
+     transition: transform .6s ease;
+   }
+   .mf-card3d.is-flipped .mf-card-inner { transform: rotateY(180deg); }
+   
+   .mf-card-face {
+     position: absolute; inset: 0;
+     backface-visibility: hidden; -webkit-backface-visibility: hidden;
+     display: flex; flex-direction: column;
+     background: #111827; border: 1px solid #1f2937; border-radius: 14px;
+     overflow: hidden;
+   }
+   .mf-card-front { }
+   .mf-card-back  { transform: rotateY(180deg); }
+   
+   .mf-back-body { display: flex; flex-direction: column; gap: 8px; padding: 12px; height: 100%; }
+   .mf-back-title { font-weight: 800; color: #f8fafc; font-size: 14px; }
+   .mf-back-meta  { font-size: 12px; color: #94a3b8; display: flex; align-items: center; gap: 6px; }
+   .mf-overview   { margin-top: 4px; color: #cbd5e1; font-size: 13px; line-height: 1.35; overflow: auto; }
+   
+   /* Flip buttons */
+   .mf-flip-btn {
+     position: absolute; top: 8px; right: 8px;
+     width: 28px; height: 28px; border-radius: 999px;
+     border: 1px solid #334155; background: #0b1224; color: #e5e7eb;
+     display: grid; place-items: center; cursor: pointer; z-index: 2;
+   }
+   .mf-flip-btn:hover { background: #0f172a; }
+   .mf-flip-btn--back { left: 8px; right: auto; }
+   
+   /* =========================
+      Pagination
+      ========================= */
+   .mf-pager {
+     display: flex; gap: 8px; justify-content: center; align-items: center;
+     margin: 16px 0 32px;
+   }
+   .mf-pager button {
+     padding: 8px 12px; border-radius: 10px; border: 1px solid #334155;
+     background: #0b1224; color: #e5e7eb; cursor: pointer;
+   }
+   .mf-pager button:hover { background: #0f172a; }
+   .mf-pager button[disabled] { opacity: .5; cursor: not-allowed; }
+   .mf-pager button.is-active { background: #38bdf8; border-color: #38bdf8; color: #0b1224; font-weight: 700; }
+
+   @media (hover: hover) {
+    .mf-card3d:hover .mf-card-inner { transform: rotateY(180deg); }
+  }
+  
+   
