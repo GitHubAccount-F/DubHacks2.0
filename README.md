@@ -1,4 +1,4 @@
-# MoodFlix
+# 🎥 MoodFlix
 *A mood-based movie discovery app designed to make choosing what to watch simple and enjoyable.*
 
 ---
@@ -111,8 +111,8 @@ movie-finder/
 
 ## Team
 
-Czarin Dela Cruz – Frontend, UI/UX Design, Data Cleaning
-Fardeen Azizi – Data Processing, Backend
+- Czarin Dela Cruz – Frontend, UI/UX Design, Data Cleaning
+- Fardeen Azizi – Data Processing, Backend
 
 ## License
 
