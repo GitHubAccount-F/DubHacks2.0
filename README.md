@@ -1,4 +1,4 @@
-# Movie Finder  
+# MoodFlix
 *A mood-based movie discovery app designed to make choosing what to watch simple and enjoyable.*
 
 ---
