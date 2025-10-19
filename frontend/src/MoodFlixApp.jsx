@@ -5,7 +5,7 @@ import Papa from "papaparse";
 // Constants & helpers
 // -----------------------------------------
 
-const PLACEHOLDER_POSTER = "https://placehold.co/200x300?text=No+Poster";
+const PLACEHOLDER_POSTER = "movie_icon.png";
 const TMDB_BASE = "https://image.tmdb.org/t/p/w342";
 
 const safe = (x) => (x == null ? "" : String(x));
